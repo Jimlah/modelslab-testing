@@ -14,6 +14,5 @@ test('Get all users', function () {
         "Accept" => "application/json",
         "Authorization" => "Bearer {$user->keys->first()->key}"
     ]);
-    dd($response->json());
     $response->assertStatus(200);
 });
