@@ -17,7 +17,6 @@ class AiAgentController extends Controller
     public function aiAgent(AiAgentFetchRequest $request, AiAgent $aiAgent): JsonResponse
     {
         $data = $aiAgent->aiAgent($request->validated());
-        dd($data);
         return response()->json([
             'status' => 'success',
             'message' => 'AI agent response retrieved successfully',
