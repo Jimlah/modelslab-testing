@@ -16,7 +16,6 @@ class DeepFakeController extends Controller
      */
     public function singleFaceSwap(DeepFakeSingleSwapRequest $request, Deepfake $service): JsonResponse
     {
-
         $data = $service->swapFaceSingle($request->validated());
         if ($data->get('status') === 'success') {
             return response()->json([

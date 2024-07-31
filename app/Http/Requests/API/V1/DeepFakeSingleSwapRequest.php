@@ -25,9 +25,9 @@ class DeepFakeSingleSwapRequest extends FormRequest
         return [
             'init_image' => ['required', 'url'],
             'target_image' => ['required', 'url'],
-            'source_image' => ['required_unless:init_image,null', 'url'],
             'watermark' => 'nullable|boolean',
             'webhook' => 'nullable|url',
+            'source_image' => ['required_unless:init_image,null', 'url'],
         ];
     }
 
