@@ -5,7 +5,7 @@ namespace App\Contract;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Traits\ForwardsCalls;
 
-abstract class ApiContract
+abstract class BaseApi
 {
     use ForwardsCalls;
 

@@ -7,28 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\DeepFakeSingleSwapRequest;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Pipeline;
 
 class DeepFakeController extends Controller
 {
+    public function __construct(
+        public Deepfake $service
+    ) {}
+
     /**
      * @throws ConnectionException
      */
-    public function singleFaceSwap(DeepFakeSingleSwapRequest $request, Deepfake $service): JsonResponse
+    public function singleFaceSwap(DeepFakeSingleSwapRequest $request, Pipeline $pipeline): JsonResponse
     {
-        $data = $service->swapFaceSingle($request->validated());
-        if ($data->get('status') === 'success') {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Face swap queued successfully',
-                'data' => $data,
-            ]);
-        }
+        $data = $this->service->swapFaceSingle($request->validated());
 
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Face swap failed',
-            'data' => $data,
-        ], 400);
+        return response()->json($data);
     }
 }

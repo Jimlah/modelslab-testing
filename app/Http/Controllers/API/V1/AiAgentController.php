@@ -11,12 +11,17 @@ use Illuminate\Http\Request;
 
 class AiAgentController extends Controller
 {
+    public function __construct(
+        Public AiAgent $service
+    )
+    {
+    }
     /**
      * @throws ConnectionException
      */
-    public function aiAgent(AiAgentFetchRequest $request, AiAgent $aiAgent): JsonResponse
+    public function aiAgent(AiAgentFetchRequest $request): JsonResponse
     {
-        $data = $aiAgent->aiAgent($request->validated());
+        $data = $this->service->aiAgent($request->validated());
         return response()->json([
             'status' => 'success',
             'message' => 'AI agent response retrieved successfully',
@@ -27,10 +32,9 @@ class AiAgentController extends Controller
     /**
      * @throws ConnectionException
      */
-    public function fetch(Request $request, AiAgent $aiAgent): JsonResponse
+    public function fetch(Request $request): JsonResponse
     {
-        $data = $aiAgent->fetch($request->id);
-        dd($data);
+        $data = $this->service->fetch($request->id);
         return response()->json([
             'status' => 'success',
             'message' => 'AI agent response retrieved successfully',
